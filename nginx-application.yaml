@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/harryGIbong/argotest.git' # 👈 **CHANGE THIS** to your repo URL
     targetRevision: HEAD # Tracks the latest commit on the main/master branch
-    path: '' # 👈 **CHANGE THIS** to the directory where nginx-deployment.yaml is located. Use '.' if it's in the root.
+    path: 'apps' # 👈 **CHANGE THIS** to the directory where nginx-deployment.yaml is located. Use '.' if it's in the root.
 
   # Destination where the app will be deployed
   destination:

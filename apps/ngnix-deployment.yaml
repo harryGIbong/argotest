@@ -4,6 +4,7 @@ metadata:
   name: nginx-deployment
   labels:
     app: nginx
+    env: dev
 spec:
   replicas: 2 # Let's run 2 pods
   selector:
@@ -13,6 +14,7 @@ spec:
     metadata:
       labels:
         app: nginx
+        serviceName: nginx-service
     spec:
       containers:
       - name: nginx
