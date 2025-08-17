@@ -1,0 +1,27 @@
+# nginx-application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-webapp
+  namespace: argocd # This manifest must be created in the argocd namespace
+spec:
+  project: default
+
+  # Source of the application manifests
+  source:
+    repoURL: 'https://github.com/harryGIbong/argotest.git' # 👈 **CHANGE THIS** to your repo URL
+    targetRevision: HEAD # Tracks the latest commit on the main/master branch
+    path: '' # 👈 **CHANGE THIS** to the directory where nginx-deployment.yaml is located. Use '.' if it's in the root.
+
+  # Destination where the app will be deployed
+  destination:
+    server: 'https://kubernetes.default.svc' # This means the local cluster where Argo CD is running
+    namespace: default # Deploy the nginx app into the 'default' namespace
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: true    # Deletes resources that are no longer defined in Git
+      selfHeal: true # Reverts any manual changes made in the cluster to match the state in Git
+    syncOptions:
+    - CreateNamespace=true # Automatically create the destination namespace if it doesn't exist
